@@ -1,7 +1,6 @@
 import { createServer } from "http";
 import { parse } from "url";
 import app from "./index.js";
-import { VercelRequest, VercelResponse } from '@vercel/node';
 
 // Create a server with the Express app
 const server = createServer((req, res) => {
@@ -9,6 +8,6 @@ const server = createServer((req, res) => {
   app(req, res);
 });
 
-export default (req: VercelRequest, res: VercelResponse) => {
+export default (req, res) => {
   server.emit('request', req, res);
 };
