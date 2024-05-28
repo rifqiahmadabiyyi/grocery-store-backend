@@ -1,17 +1,19 @@
-import express from "express"
-import cors from "cors"
+import express from "express";
+import cors from "cors";
 import db from "../models/index.js";
 import productRouter from "../routes/productRoute.js";
-import setupSwagger from "../swaggerConfig.js";
+import dotenv from "dotenv";
 
+// Load environment variables
+dotenv.config();
 
-// app config
-const app = express()
-const port = 4000
+// App config
+const app = express();
+// const port = 4000; // Not used in serverless environment but kept for local dev
 
-// middleware
-app.use(express.json())
-app.use(cors())
+// Middleware
+app.use(express.json());
+app.use(cors());
 
 db.sequelize.sync()
 .then(() => {
@@ -21,16 +23,12 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
 });
 
-app.use("/api/products", productRouter)
-
-app.use("/images", express.static('uploads'))
+app.use("/api/products", productRouter);
+app.use("/images", express.static('uploads'));
 
 app.get("/", (req, res) => {
-    res.send("Welcome to Grocery Store API")
-})
+    res.send("Welcome to Grocery Store API");
+});
 
-setupSwagger(app);
-
-app.listen(port, () => {
-    console.log(`Server is Running`)
-})
+// Export the app as a module
+export default app;
