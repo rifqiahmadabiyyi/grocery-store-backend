@@ -32,5 +32,5 @@ app.get("/", (req, res) => {
 setupSwagger(app);
 
 app.listen(port, () => {
-    console.log(`Server Running on http://localhost:${port}`)
+    console.log(`Server is Running`)
 })
