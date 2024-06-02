@@ -2,6 +2,7 @@ import dbConfig from "../config/db.config.js";
 import { Sequelize } from "sequelize";
 import tutorialModel from "./tutorial.model.js";
 import productModel from "./product.model.js";
+import userModel from "./userModel.js";
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
@@ -18,7 +19,8 @@ const db = {
   Sequelize,
   sequelize,
 //   tutorials: tutorialModel(sequelize, Sequelize),
-  products: productModel(sequelize, Sequelize)
+  products: productModel(sequelize, Sequelize),
+  users: userModel(sequelize, Sequelize)
 };
 
 export default db;
