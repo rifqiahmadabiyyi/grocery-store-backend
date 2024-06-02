@@ -15,7 +15,7 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ where: { email } })
 
         if(!user) {
-            return res.json({
+            return res.status(404).json({
                 success:false,
                 message: "User Doesn't exist"
             })
@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
 
         if(!isMatch) {
-            return res.json({
+            return res.status(401).json({
                 success:false,
                 message:"Invalid Credentials"
             })
@@ -49,21 +49,21 @@ const registerUser = async (req, res) => {
     try {
         const exists = await User.findOne({ where: { email } })
         if(exists) {
-            return res.json({
+            return res.status(401).json({
                 success: false,
                 message: "User Already exists"
             })
         }
 
         if(!validator.isEmail(email)) {
-            return res.json({
+            return res.status(401).json({
                 success: false,
                 message: "Please enter a valid email."
             })
         }
 
         if(password.length<8) {
-            return res.json({
+            return res.status(401).json({
                 success: false,
                 message: "Password must be strong and have more than 8 characters."
             })
