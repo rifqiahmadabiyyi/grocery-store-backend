@@ -80,4 +80,11 @@ userRouter.post('/register', registerUser)
  */
 userRouter.post('/login', loginUser)
 
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: The Auth User managing API
+ */
+
 export default userRouter;
