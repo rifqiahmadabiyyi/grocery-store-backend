@@ -1,5 +1,5 @@
 import express from "express"
-import { addProduct, listProduct, removeProduct, updateProduct } from "../controllers/productController.js"
+import { addProduct, listProduct, removeProduct, updateProduct, getProductById, bulkAddProducts, updateImage } from "../controllers/productController.js"
 import multer from "multer"
 
 const productRouter = express.Router();
@@ -22,6 +22,21 @@ const upload = multer({storage:storage})
  *       required: true
  *       content:
  *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               category:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
@@ -175,5 +190,8 @@ productRouter.delete("/:id", removeProduct)
  *         description: Some server error
  */
 productRouter.put("/:id", upload.single("image"), updateProduct)
+productRouter.get("/:id", getProductById)
+productRouter.post("/bulk", bulkAddProducts)
+productRouter.put('/:id/image', upload.single('image'), updateImage);
 
 export default productRouter;
