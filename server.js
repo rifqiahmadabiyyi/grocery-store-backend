@@ -6,6 +6,7 @@ import setupSwagger from "./swaggerConfig.js";
 import userRouter from "./routes/userRoute.js";
 import transactionRouter from "./routes/TransactionRoute.js";
 import dotenv from "dotenv"
+import cartRouter from "./routes/cartRoute.js";
 
 dotenv.config()
 
@@ -33,6 +34,8 @@ app.use("/images", express.static('uploads'))
 app.use("/api/users", userRouter)
 
 app.use("/api/transactions", transactionRouter)
+
+app.use("/api/carts", cartRouter)
 
 app.get("/", (req, res) => {
     res.send("Welcome to Grocery Store API")

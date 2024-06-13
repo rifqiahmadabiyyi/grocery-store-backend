@@ -13,7 +13,7 @@ const userModel = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false
         },
-        cardData: {
+        cartData: {
             type: Sequelize.JSON,
             default: {}
         }
