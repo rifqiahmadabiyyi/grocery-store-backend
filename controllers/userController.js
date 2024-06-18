@@ -35,7 +35,8 @@ const loginUser = async (req, res) => {
             success:true,
             token,
             user:user.username,
-            user_id:user.id
+            user_id:user.id,
+            user_role:user.role
         })
 
     } catch (err) {
@@ -84,7 +85,10 @@ const registerUser = async (req, res) => {
         const token = await createToken(user.id)
         res.json({
             success:true,
-            token
+            token,
+            user:user.username,
+            user_id:user.id,
+            user_role:user.role
         })
 
     } catch (err) {
